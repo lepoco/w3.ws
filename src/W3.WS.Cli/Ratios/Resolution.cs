@@ -3,12 +3,20 @@
 // Copyright (C) 2022 Leszek Pomianowski and W3.WS.CLI Contributors.
 // All Rights Reserved.
 
+using System;
+
 namespace W3.WS.Cli.Ratios;
 
-internal struct Resolution
+public struct Resolution
 {
     public int Horizontal { get; set; }
+
     public int Vertical { get; set; }
 
-    public byte[] Seq { get; set; }
+    public byte[] GetRatio()
+    {
+        float aspectRatio = (float)Horizontal / (float)Vertical;
+
+        return BitConverter.GetBytes(aspectRatio);
+    }
 }

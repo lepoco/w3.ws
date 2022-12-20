@@ -11,7 +11,7 @@ namespace W3.WS.Cli.Game;
 
 internal static class ExecutableLocator
 {
-    public static IEnumerable<string> GetLocations()
+    public static IList<GameInstance> GetLocations()
     {
         var workingDirectory = Environment.CurrentDirectory;
 
@@ -35,27 +35,21 @@ internal static class ExecutableLocator
             if (Directory.Exists(location))
                 return FetchExecutables(location);
 
-        return Array.Empty<string>();
+        return Array.Empty<GameInstance>();
     }
 
-    private static IEnumerable<string> FetchExecutables(string basePath)
+    private static IList<GameInstance> FetchExecutables(string basePath)
     {
+        var instances = new List<GameInstance>();
         var x64Path = Path.Combine(basePath, @"bin\x64\witcher3.exe");
         var x64Dx12Path = Path.Combine(basePath, @"bin\x64_dx12\witcher3.exe");
 
-        if (!File.Exists(x64Path))
-            return Array.Empty<string>();
+        if (File.Exists(x64Path))
+            instances.Add(new GameInstance(GameInstanceType.X64, x64Path));
 
         if (File.Exists(x64Dx12Path))
-            return new string[]
-            {
-                x64Path,
-                x64Dx12Path
-            };
+            instances.Add(new GameInstance(GameInstanceType.DX12, x64Dx12Path));
 
-        return new string[]
-        {
-            x64Path
-        };
+        return instances;
     }
 }
