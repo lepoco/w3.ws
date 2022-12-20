@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Version>0.1.0</Version>
+        <AssemblyName>w3ws</AssemblyName>
+        <Title>Witcher 3 Widescreen Patcher</Title>
+        <Product>Witcher 3 Widescreen Patcher</Product>
+        <TargetFramework>net472</TargetFramework>
+        <LangVersion>10.0</LangVersion>
+        <OutputType>exe</OutputType>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <ApplicationIcon>witcherIco.ico</ApplicationIcon>
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Company>lepo.co | Leszek Pomianowski</Company>
+        <Authors>lepo.co | Leszek Pomianowski</Authors>
+        <Copyright>Copyright © 2022 lepo.co | Leszek Pomianowski</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="witcherIco.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="LICENSE">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="README.md">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
