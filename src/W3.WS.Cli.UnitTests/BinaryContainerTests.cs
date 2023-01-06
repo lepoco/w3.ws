@@ -24,4 +24,45 @@ public class BinaryContainerTests
 
         Assert.Equal(container.Content, expectedOutput);
     }
+
+    [Fact]
+    public void ReplacementAfterWorksOnSingleOccurence()
+    {
+        var binaryContents = new byte[]
+        {
+            0xFF,
+            0xB0,
+            0xBC,
+            0xC2,
+            0x03,
+            0xFF,
+            0xFF,
+            0x00,
+            0xBE,
+            0xAE,
+            0xBB
+        };
+        var searchedValue = new byte[] { 0xBC, 0xC2, 0x03 };
+        var replaceValue = new byte[] { 0xAA, 0xAA, 0xAA };
+
+        var expectedOutput = new byte[]
+        {
+            0xFF,
+            0xB0,
+            0xBC,
+            0xC2,
+            0x03,
+            0xAA,
+            0xAA,
+            0xAA,
+            0xBE,
+            0xAE,
+            0xBB
+        };
+
+        var container = new BinaryContainer(binaryContents);
+        container.ReplaceAfter(searchedValue, replaceValue);
+
+        Assert.Equal(container.Content, expectedOutput);
+    }
 }

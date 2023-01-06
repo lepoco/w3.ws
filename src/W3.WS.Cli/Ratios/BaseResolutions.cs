@@ -7,16 +7,20 @@ namespace W3.WS.Cli.Ratios;
 
 internal static class BaseResolutions
 {
-    public static readonly byte[] BakedSequence = new byte[] { 0x39, 0x8E, 0xE3, 0x3F };
+    public static readonly Resolution BakedResolution = new Resolution
+    {
+        Horizontal = 1920,
+        Vertical = 1080
+    };
 
     public static readonly Resolution[] Common = new Resolution[]
     {
-        new () { Horizontal = 2560, Vertical = 1080 },
-        new () { Horizontal = 3440, Vertical = 1440 },
-        new () { Horizontal = 3840, Vertical = 1200 },
-        new () { Horizontal = 3840, Vertical = 1600 },
-        new () { Horizontal = 5120, Vertical = 1440 },
-        new () { Horizontal = 5120, Vertical = 2160 },
-        new () { Horizontal = 6880, Vertical = 2880 }
+        new() { Horizontal = 2560, Vertical = 1080 },
+        new() { Horizontal = 3440, Vertical = 1440 },
+        new() { Horizontal = 3840, Vertical = 1200 },
+        new() { Horizontal = 3840, Vertical = 1600 },
+        new() { Horizontal = 5120, Vertical = 1440 },
+        new() { Horizontal = 5120, Vertical = 2160 },
+        new() { Horizontal = 6880, Vertical = 2880 }
     };
 }

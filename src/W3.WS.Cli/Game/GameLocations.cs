@@ -9,13 +9,18 @@ internal static class GameLocations
 {
     public const string BaseGogLocation = @"C:\Program Files (x86)\GOG Galaxy\Games\The Witcher 3\";
 
-    public const string WildGogLocation = @"C:\Program Files (x86)\GOG Galaxy\Games\The Witcher 3 Wild Hunt\";
+    public const string WildGogLocation =
+        @"C:\Program Files (x86)\GOG Galaxy\Games\The Witcher 3 Wild Hunt\";
 
-    public const string GotyGogLocation = @"C:\Program Files (x86)\GOG Galaxy\Games\The Witcher 3 Wild Hunt GOTY\";
+    public const string GotyGogLocation =
+        @"C:\Program Files (x86)\GOG Galaxy\Games\The Witcher 3 Wild Hunt GOTY\";
 
-    public const string BaseSteamLocation = @"C:\Program Files (x86)\Steam\steamapps\common\The Witcher 3";
+    public const string BaseSteamLocation =
+        @"C:\Program Files (x86)\Steam\steamapps\common\The Witcher 3";
 
-    public const string WildSteamLocation = @"C:\Program Files (x86)\Steam\steamapps\The Witcher 3 Wild Hunt\";
+    public const string WildSteamLocation =
+        @"C:\Program Files (x86)\Steam\steamapps\The Witcher 3 Wild Hunt\";
 
-    public const string GotySteamLocation = @"C:\Program Files (x86)\Steam\steamapps\The Witcher 3 Wild Hunt GOTY\";
+    public const string GotySteamLocation =
+        @"C:\Program Files (x86)\Steam\steamapps\The Witcher 3 Wild Hunt GOTY\";
 }

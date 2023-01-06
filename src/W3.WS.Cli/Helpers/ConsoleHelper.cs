@@ -9,8 +9,7 @@ namespace W3.WS.Cli.Helpers;
 
 internal static class ConsoleHelper
 {
-    public static void WriteLog(string message)
-        => WriteLog(message, true);
+    public static void WriteLog(string message) => WriteLog(message, true);
 
     public static void WriteLog(string message, bool appendDots)
     {

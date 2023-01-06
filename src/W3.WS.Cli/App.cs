@@ -15,9 +15,27 @@ using W3.WS.Cli.Ratios;
 
 namespace W3.WS.Cli;
 
+// 89 83 30 01 00 00 C7 83 38 01 00 00 > 39 8E E3 3F > SELECTED
+// AC 65 E8 3F B4 C2 E6 3F 98 25 E5 3F > 39 8E E3 3F > SELECTED
+// 00 00 E0 3F 9A 99 99 99 99 99 E1 3F > 39 8E E3 3F > SELECTED
+
+// This class is a mess, please don't blame me, it was just supposed to work somehow
 internal class App
 {
     private const string AppName = "WITCHER 3 WIDESCREEN PATCHER";
+
+    // For build 4.0.0.66291 | 4.0.1.755
+    private static readonly byte[] PreBakedValue = new byte[]
+    {
+        0x9A,
+        0x99,
+        0x99,
+        0x99,
+        0x99,
+        0x99,
+        0xE1,
+        0x3F
+    }; // There's a good chance that will change in the future
 
     private Ratios.Resolution _selectedResolution = new Resolution { Horizontal = 0, Vertical = 0 };
 
@@ -89,7 +107,7 @@ internal class App
             Console.WriteLine(AppName);
         }
 
-        Console.WriteLine("For Witcher 3 Complete Edition - 4.0.1.427");
+        Console.WriteLine("For Witcher 3 Complete Edition - 4.0.1.755");
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("https://nexusmods.com/witcher3/mods/7324");
         Console.ResetColor();
@@ -123,7 +141,10 @@ internal class App
         if (_gameExecutables == null)
             return;
 
-        var backupPath = Path.Combine(Environment.CurrentDirectory, $"backup_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}");
+        var backupPath = Path.Combine(
+            Environment.CurrentDirectory,
+            $"backup_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}"
+        );
 
         foreach (var item in _gameExecutables)
         {
@@ -132,7 +153,8 @@ internal class App
 
             string backupFilePath = item.Type switch
             {
-                GameInstanceType.DX12 => backupFilePath = Path.Combine(backupPath, "x64_dx12/witcher3.exe"),
+                GameInstanceType.DX12
+                    => backupFilePath = Path.Combine(backupPath, "x64_dx12/witcher3.exe"),
                 _ => backupFilePath = Path.Combine(backupPath, "x64/witcher3.exe")
             };
 
@@ -144,9 +166,13 @@ internal class App
             if (!File.Exists(backupFilePath))
                 File.Copy(item.Path, backupFilePath);
 
-            ConsoleHelper.WriteLog($"Created backup in: {new Uri(backupFilePath).AbsolutePath}", false);
+            ConsoleHelper.WriteLog(
+                $"Created backup in: {new Uri(backupFilePath).AbsolutePath}",
+                false
+            );
         }
     }
+
     private bool SelectResolution()
     {
         Console.WriteLine("Select your resolution: ");
@@ -156,7 +182,9 @@ internal class App
         Console.WriteLine($"    0 ) Custom");
 
         for (int i = 0; i < BaseResolutions.Common.Length; i++)
-            Console.WriteLine($"    {i + 1} ) {BaseResolutions.Common[i].Horizontal}x{BaseResolutions.Common[i].Vertical}");
+            Console.WriteLine(
+                $"    {i + 1} ) {BaseResolutions.Common[i].Horizontal}x{BaseResolutions.Common[i].Vertical}"
+            );
 
         Console.ResetColor();
         Console.WriteLine(String.Empty);
@@ -182,7 +210,10 @@ internal class App
         {
             _selectedResolution = BaseResolutions.Common[parsedKeyNumber - 1];
 
-            ConsoleHelper.WriteLog($"Selected: {_selectedResolution.Horizontal}x{_selectedResolution.Vertical}", false);
+            ConsoleHelper.WriteLog(
+                $"Selected: {_selectedResolution.Horizontal}x{_selectedResolution.Vertical}",
+                false
+            );
 
             return true;
         }
@@ -194,8 +225,8 @@ internal class App
 
     private bool ManuallyReadResolution()
     {
-        var horizontalResolution = 0;
-        var verticalResolution = 0;
+        int horizontalResolution,
+            verticalResolution;
 
         Console.WriteLine(String.Empty);
         Console.Write("    Type your horizontal resolution: ");
@@ -222,14 +253,17 @@ internal class App
             return false;
         }
 
-        _selectedResolution = new Ratios.Resolution
+        _selectedResolution = new Resolution
         {
             Horizontal = horizontalResolution,
             Vertical = verticalResolution
         };
 
         Console.WriteLine(String.Empty);
-        ConsoleHelper.WriteLog($"Selected: {_selectedResolution.Horizontal}x{_selectedResolution.Vertical}", false);
+        ConsoleHelper.WriteLog(
+            $"Selected: {_selectedResolution.Horizontal}x{_selectedResolution.Vertical}",
+            false
+        );
 
         return true;
     }
@@ -249,7 +283,8 @@ internal class App
 
             ConsoleHelper.WriteLog($"Replacing contents in {executable.Path}");
 
-            var replaces = executable.Container?.ReplaceAll(BaseResolutions.BakedSequence, selectedSequence);
+            //var replaces = executable.Container?.ReplaceAll(BaseResolutions.BakedResolution.GetRatio(), selectedSequence);
+            var replaces = executable.Container?.ReplaceAfter(PreBakedValue, selectedSequence);
 
             ConsoleHelper.WriteSuccess($"{replaces} reps have been replaced.");
 

@@ -16,12 +16,12 @@ public class BinaryContainer
         Content = content;
     }
 
-    public int ReplaceAll(byte[] search, byte[] replace)
+    public int ReplaceAfter(byte[] search, byte[] replacement)
     {
-        var occurences = 0;
+        var occurrences = 0;
 
-        if (search.Length != replace.Length)
-            throw new Exception("Binary arrays must be of the same length.");
+        if (search.Length < 1 || replacement.Length < 1)
+            throw new Exception("Binary arrays must be non negative.");
 
         for (int i = 0; i < Content.Length; i++)
         {
@@ -29,11 +29,13 @@ public class BinaryContainer
             if (Content[i] != search[0])
                 continue;
 
+            // If enough left
             if (Content.Length < i + search.Length)
                 continue;
 
             var match = true;
 
+            // Whether is matched
             for (int j = 0; j < search.Length; j++)
             {
                 if (Content[i + j] != search[j])
@@ -43,12 +45,60 @@ public class BinaryContainer
             if (!match)
                 continue;
 
-            for (int j = 0; j < replace.Length; j++)
-                Content[i + j] = replace[j];
+            // i as content position plus search length
+            var contentStartPosition = i + search.Length;
 
-            occurences++;
+            // Replace
+            for (int j = 0; j < replacement.Length; j++)
+                Content[contentStartPosition + j] = replacement[j];
+
+            // Counter
+            occurrences++;
         }
 
-        return occurences;
+        return occurrences;
+    }
+
+    public int ReplaceAll(byte[] search, byte[] replacement)
+    {
+        var occurrences = 0;
+
+        if (search.Length < 1 || replacement.Length < 1)
+            throw new Exception("Binary arrays must be non negative.");
+
+        if (search.Length != replacement.Length)
+            throw new Exception("Binary arrays must be of the same length.");
+
+        for (int i = 0; i < Content.Length; i++)
+        {
+            // If first element matches
+            if (Content[i] != search[0])
+                continue;
+
+            // If enough left
+            if (Content.Length < i + search.Length)
+                continue;
+
+            var match = true;
+
+            // Whether is matched
+            for (int j = 0; j < search.Length; j++)
+            {
+                if (Content[i + j] != search[j])
+                    match = false;
+            }
+
+            if (!match)
+                continue;
+
+            // Replace
+            for (int j = 0; j < replacement.Length; j++)
+                Content[i + j] = replacement[j];
+
+            // Counter
+            occurrences++;
+        }
+
+        return occurrences;
     }
 }

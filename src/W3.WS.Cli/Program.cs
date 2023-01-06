@@ -9,6 +9,5 @@ namespace W3.WS.Cli;
 
 internal class Program
 {
-    static async Task<int> Main(string[] args)
-        => await new App().RunAsync(args);
+    static async Task<int> Main(string[] args) => await new App().RunAsync(args);
 }
