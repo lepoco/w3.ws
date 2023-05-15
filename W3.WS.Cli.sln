@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W3.WS.Cli", "W3.WS.Cli\W3.WS.Cli.csproj", "{F6DDDD2B-9F25-4F16-8FC0-3A486EF10416}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W3.WS.Cli", "src\W3.WS.Cli\W3.WS.Cli.csproj", "{F6DDDD2B-9F25-4F16-8FC0-3A486EF10416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W3.WS.Cli.UnitTests", "W3.WS.Cli.UnitTests\W3.WS.Cli.UnitTests.csproj", "{10F0D635-95BC-4670-AEC2-3F2A9EC9D099}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W3.WS.Cli.UnitTests", "tests\W3.WS.Cli.UnitTests\W3.WS.Cli.UnitTests.csproj", "{10F0D635-95BC-4670-AEC2-3F2A9EC9D099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
