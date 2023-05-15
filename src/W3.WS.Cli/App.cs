@@ -1,6 +1,6 @@
 ﻿// This Source Code Form is subject to the terms of the GNU GPL-3.0.
 // If a copy of the GPL was not distributed with this file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
-// Copyright (C) 2022 Leszek Pomianowski and W3.WS.CLI Contributors.
+// Copyright (C) 2022-2023 Leszek Pomianowski and W3.WS.CLI Contributors.
 // All Rights Reserved.
 
 using System;
@@ -37,7 +37,7 @@ internal class App
         0x3F
     }; // There's a good chance that will change in the future
 
-    private Ratios.Resolution _selectedResolution = new Resolution { Horizontal = 0, Vertical = 0 };
+    private Ratios.Resolution _selectedResolution = new Resolution(0, 0);
 
     private IList<GameInstance>? _gameExecutables;
 
@@ -253,11 +253,7 @@ internal class App
             return false;
         }
 
-        _selectedResolution = new Resolution
-        {
-            Horizontal = horizontalResolution,
-            Vertical = verticalResolution
-        };
+        _selectedResolution = new Resolution(horizontalResolution, verticalResolution);
 
         Console.WriteLine(String.Empty);
         ConsoleHelper.WriteLog(

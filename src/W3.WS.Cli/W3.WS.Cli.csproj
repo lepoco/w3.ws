@@ -8,23 +8,19 @@
         <TargetFramework>net472</TargetFramework>
         <LangVersion>10.0</LangVersion>
         <OutputType>exe</OutputType>
-        <ImplicitUsings>disable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        
         <IsPackable>false</IsPackable>
         <NeutralLanguage>en-US</NeutralLanguage>
         <ApplicationIcon>witcherIco.ico</ApplicationIcon>
-        <Deterministic>true</Deterministic>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <Company>lepo.co | Leszek Pomianowski</Company>
-        <Authors>lepo.co | Leszek Pomianowski</Authors>
-        <Copyright>Copyright © 2022 lepo.co | Leszek Pomianowski</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
         <Content Include="witcherIco.ico" />
     </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolySharp" />
+  </ItemGroup>
 
     <ItemGroup>
       <None Update="LICENSE">

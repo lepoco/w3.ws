@@ -1,26 +1,22 @@
 ﻿// This Source Code Form is subject to the terms of the GNU GPL-3.0.
 // If a copy of the GPL was not distributed with this file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
-// Copyright (C) 2022 Leszek Pomianowski and W3.WS.CLI Contributors.
+// Copyright (C) 2022-2023 Leszek Pomianowski and W3.WS.CLI Contributors.
 // All Rights Reserved.
 
 namespace W3.WS.Cli.Ratios;
 
-internal static class BaseResolutions
+static class BaseResolutions
 {
-    public static readonly Resolution BakedResolution = new Resolution
-    {
-        Horizontal = 1920,
-        Vertical = 1080
-    };
+    public static readonly Resolution BakedResolution = new Resolution(1920, 1080);
 
     public static readonly Resolution[] Common = new Resolution[]
     {
-        new() { Horizontal = 2560, Vertical = 1080 },
-        new() { Horizontal = 3440, Vertical = 1440 },
-        new() { Horizontal = 3840, Vertical = 1200 },
-        new() { Horizontal = 3840, Vertical = 1600 },
-        new() { Horizontal = 5120, Vertical = 1440 },
-        new() { Horizontal = 5120, Vertical = 2160 },
-        new() { Horizontal = 6880, Vertical = 2880 }
+        new(2560, 1080),
+        new(3440, 1440),
+        new(3840, 1200),
+        new(3840, 1600),
+        new(5120, 1440),
+        new(5120, 2160),
+        new(6880, 2880)
     };
 }
